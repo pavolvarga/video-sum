@@ -6,10 +6,19 @@ It then sums their lengths together and print total time.
 
 ## Installation
 
+App is written in [node.js](https://nodejs.org/en/), therefore you must install it.
+You also must have **node** and **npm** executables on the **PATH**.
+
 Clone this repository:
 
 ```sh
 git clone https://github.com/pavolvarga/video-sum.git
+```
+
+Go to the directory:
+
+```sh
+cd video-sum
 ```
 
 Then install dependencies:
@@ -20,9 +29,8 @@ npm install
 
 ## Usage
 
-App is written in **node.js**, therefore you must have it installed and on the **PATH**.
-It uses **ffmpeg** for opening and reading metadata from video files. Therefore both
-**ffmpeg** and **ffprobe** must be installed and on the **PATH**.
+It uses [ffmpeg](http://www.ffmpeg.org/) for opening and reading metadata from video files. 
+Therefore both **ffmpeg** and **ffprobe** must be installed and on the **PATH**.
 
 ## Running
 
