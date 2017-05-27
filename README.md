@@ -51,7 +51,7 @@ node src/main --dir '/path/to/directory/videos1' '/path/to/directory/videos2'
         - errorFiles count: 0
         - total time: 0y 0m 0w 0d 10h 10m 45s
 
-'/path/to/directory/videos2
+/path/to/directory/videos2
         - files count: 2
         - errorFiles count: 0
         - total time: 0y 0m 0w 0d 1h 39m 5s
