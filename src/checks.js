@@ -46,8 +46,10 @@ function checkInputFileReadable(file) {
 
 function checkPrerequisites(cmdOptions) {
     checkProcesses();
-    checkInputFileExists(cmdOptions.list);
-    checkInputFileReadable(cmdOptions.list);
+    if (cmdOptions.list) {
+        checkInputFileExists(cmdOptions.list);
+        checkInputFileReadable(cmdOptions.list);
+    }
 }
 
 exports.checkPrerequisites = checkPrerequisites;
