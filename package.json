@@ -12,6 +12,9 @@
     "name": "Pavol Varga",
     "email": "pavol.varga@gmail.com"
   },
+  "engines": {
+    "node": ">=7.0.0"
+  },
   "dependencies": {
     "bluebird": "3.5.0",
     "colors": "1.1.2",
