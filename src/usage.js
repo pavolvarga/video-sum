@@ -13,13 +13,13 @@ const options = [
         name: 'dir',
         alias: 'd',
         multiple: true,
-        typeLabel: '[underline]{directories} ...',
+        typeLabel: '[underline]{directory}...',
         description: `Path or paths to directories with video files.`
     },
     {
         name: 'list',
         alias: 'l',
-        typeLabel: '[underline]{file path}',
+        typeLabel: '[underline]{file}',
         description: `Path to a file containing path to directories with video files.
                       This is an alternative to using the [bold]{dir} option.
                       Each path must in on separate line in the file.
@@ -29,21 +29,21 @@ const options = [
         name: 'add-video',
         alias: 'a',
         multiple: true,
-        typeLabel: '[underline]{file suffixes}...',
+        typeLabel: '[underline]{file suffix}...',
         description: `List of file suffixes for video files to add into the default list.`
     },
     {
         name: 'remove-video',
         alias: 'r',
         multiple: true,
-        typeLabel: '[underline]{file suffixes}...',
+        typeLabel: '[underline]{file suffix}...',
         description: `List of file suffixes for video files to remove from the default list.`
     },
     {
         name: 'exclude-dirs',
         alias: 'x',
         multiple: true,
-        typeLabel: '[underline]{dirs names}...',
+        typeLabel: '[underline]{directory}...',
         description: `List of directory names to exclude. 
                       When a directory with such name is found, no file in it will be counted and all its subdirectories will be skipped.`
     },
