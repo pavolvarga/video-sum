@@ -50,7 +50,7 @@ function formatDataNormal(header, time, filesCount, errorFiles) {
 }
 
 function formatDataUnprocessedFiles(header, time, filesCount, errorFiles) {
-    return `${colors.blue(header)}\n \t- files count: ${filesCount}\n \t- errorFiles count: ${errorFiles.length}\n ${listErrFiles(errorFiles)} \t- total time: ${formatTime(time)}\n`;
+    return `${colors.blue(header)}\n \t- files count: ${filesCount}\n \t- errorFiles (${errorFiles.length}):\n ${listErrFiles(errorFiles)} \t- total time: ${formatTime(time)}\n`;
 }
 
 exports.formatDataFac = formatDataFac;
