@@ -2,7 +2,7 @@
 
 const moment = require('moment');
 const colors = require('colors/safe');
-require("moment-duration-format");
+require('moment-duration-format');
 
 const {TIME_FORMAT} = require('./constants');
 
@@ -14,7 +14,7 @@ function listErrFiles(errFiles) {
     return errFiles.reduce((acc, file) => {
         acc += `\t\t- ${file}\n`;
         return acc;
-    }, "");
+    }, '');
 }
 
 function formatDataFac(terseOutput, printUnprocessedFiles, dirNotFound, dirNotReadable) {

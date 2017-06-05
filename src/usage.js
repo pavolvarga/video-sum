@@ -7,14 +7,14 @@ const options = [
         name: 'help',
         alias: 'h',
         type: Boolean,
-        description: `Displays this usage guide.`
+        description: 'Displays this usage guide.'
     },
     {
         name: 'dir',
         alias: 'd',
         multiple: true,
         typeLabel: '[underline]{directory}...',
-        description: `Path or paths to directories with video files.`
+        description: 'Path or paths to directories with video files.'
     },
     {
         name: 'list',
@@ -30,14 +30,14 @@ const options = [
         alias: 'a',
         multiple: true,
         typeLabel: '[underline]{file suffix}...',
-        description: `List of file suffixes for video files to add into the default list.`
+        description: 'List of file suffixes for video files to add into the default list.'
     },
     {
         name: 'remove-video',
         alias: 'r',
         multiple: true,
         typeLabel: '[underline]{file suffix}...',
-        description: `List of file suffixes for video files to remove from the default list.`
+        description: 'List of file suffixes for video files to remove from the default list.'
     },
     {
         name: 'exclude-dirs',
@@ -51,25 +51,25 @@ const options = [
         name: 'print-unprocessed-files',
         alias: 'u',
         type: Boolean,
-        description: `If a video file can not be open, it is skipped. Use this option to print list such files.`
+        description: 'If a video file can not be open, it is skipped. Use this option to print list such files.'
     },
     {
         name: 'terse-output',
         alias: 't',
         type: Boolean,
-        description: `Print result in terse output (directory and sum length on one line).`
+        description: 'Print result in terse output (directory and sum length on one line).'
     },
     {
         name: 'process-count',
         alias: 'p',
         type: Number,
-        description: `Change default process count to new value.`
+        description: 'Change default process count to new value.'
     },
     {
         name: 'log-errors',
         alias: 'e',
         type: Boolean,
-        description: `Print all errors to stderr (for example why a video file could not be open).`
+        description: 'Print all errors to stderr (for example why a video file could not be open).'
     }
 ];
 

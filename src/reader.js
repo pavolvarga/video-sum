@@ -8,16 +8,16 @@ function readVideoFilesInt(dir, suffixes, excludeDirs, array) {
     const files = fs.readdirSync(dir);
 
     files.forEach((file) => {
-       const
-           filePath = path.join(dir, file),
-           stat = fs.statSync(filePath);
+        const
+            filePath = path.join(dir, file),
+            stat = fs.statSync(filePath);
 
-       if (stat.isDirectory() && !excludeDirs.includes(file)) {
-           readVideoFilesInt(filePath, suffixes, excludeDirs, array);
-       }
-       if (stat.isFile() && suffixes.includes(path.extname(file))) {
-           array.push(filePath);
-       }
+        if (stat.isDirectory() && !excludeDirs.includes(file)) {
+            readVideoFilesInt(filePath, suffixes, excludeDirs, array);
+        }
+        if (stat.isFile() && suffixes.includes(path.extname(file))) {
+            array.push(filePath);
+        }
     });
 }
 
@@ -45,7 +45,7 @@ function findVideoFiles(directories, videoSuffixes, excludeDirs) {
             fs.accessSync(dir, fs.constants.R_OK);
         }
         catch(err) {
-            data = data.push(Immutable.fromJS({dir, files: [], dirNotReadable: true}))
+            data = data.push(Immutable.fromJS({dir, files: [], dirNotReadable: true}));
             return;
         }
 

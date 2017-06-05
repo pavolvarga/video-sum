@@ -17,7 +17,7 @@ const CMD_LINE_OPTION_DEFINITIONS = [
     { name: 'log-errors', alias: 'e', type: Boolean}
 ];
 
-const TIME_FORMAT = "y[y] M[m] w[w] d[d] h[h] mm[m] ss[s]";
+const TIME_FORMAT = 'y[y] M[m] w[w] d[d] h[h] mm[m] ss[s]';
 
 const DEFAULT_PROCESS_COUNT = 100;
 

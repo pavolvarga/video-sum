@@ -4,7 +4,6 @@ const ffmpeg = require('fluent-ffmpeg');
 const Promise = require('bluebird');
 const Immutable = require('immutable');
 const getUsage = require('command-line-usage');
-const colors = require('colors/safe');
 const cla = require('command-line-args');
 
 const cmdline = require('./cmdline.js');
@@ -37,7 +36,7 @@ function readDuration(file, parsedCmd) {
             return error.videoFilePath;
         }
         throw error;
-    })
+    });
 }
 
 function getTotalTimePromise(files, processCount, parsedCmd) {
@@ -51,7 +50,7 @@ function getTotalTimePromise(files, processCount, parsedCmd) {
             if (typeof  result === 'number') {
                 return acc.update('time', old => old + result);
             }
-            return acc.update('unprocessedFiles', old => old.push(result))
+            return acc.update('unprocessedFiles', old => old.push(result));
         }, Immutable.fromJS({time: 0, unprocessedFiles: []}));
     })
     .catch((err) => {
