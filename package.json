@@ -27,9 +27,15 @@
     "moment-duration-format": "1.3.0"
   },
   "devDependencies": {
-    "eslint": "3.19.0"
+    "eslint": "3.19.0",
+    "rimraf": "2.6.1",
+    "webpack": "2.6.1",
+    "webpack-node-externals": "1.6.0"
   },
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint src"
+    "clean": "./node_modules/.bin/rimraf dist/",
+    "eslint": "./node_modules/.bin/eslint src",
+    "prebuild": "npm run clean && npm run eslint",
+    "build": "./node_modules/.bin/webpack"
   }
 }
