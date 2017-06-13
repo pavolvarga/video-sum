@@ -1,18 +1,20 @@
 'use strict';
 
-const ffmpeg = require('fluent-ffmpeg');
-const Promise = require('bluebird');
-const Immutable = require('immutable');
-const getUsage = require('command-line-usage');
-const cla = require('command-line-args');
+require('babel-polyfill');
 
-const cmdline = require('./cmdline.js');
-const reader = require('./reader.js');
-const {formatDataFac} = require('./output');
-const {ReadVideoFileError} = require('./errors');
-const {sections} = require('./usage');
-const {CMD_LINE_OPTION_DEFINITIONS} = require('./constants');
-const {checkPrerequisites} = require('./checks');
+import ffmpeg from 'fluent-ffmpeg';
+import Promise from 'bluebird';
+import * as Immutable from 'immutable';
+import getUsage from 'command-line-usage';
+import cla from 'command-line-args';
+
+import {parseCmd} from './cmdline.js';
+import {findVideoFiles} from './reader.js';
+import {formatDataFac} from './output';
+import {ReadVideoFileError} from './errors';
+import {sections} from './usage';
+import {CMD_LINE_OPTION_DEFINITIONS} from './constants';
+import {checkPrerequisites} from './checks';
 
 function readDuration(file, parsedCmd) {
     return new Promise(
@@ -106,7 +108,7 @@ function main() {
 
     checkPrerequisites(cmdOptions);
 
-    const parsedCmd = cmdline.parseCmd(cmdOptions);
+    const parsedCmd = parseCmd(cmdOptions);
 
     //no cmd options or the help option
     if (process.argv.slice(2).length === 0 || parsedCmd.get('help')) {
@@ -115,7 +117,7 @@ function main() {
     }
 
     const
-        videoFiles = reader.findVideoFiles(parsedCmd.get('directories'), parsedCmd.get('videoSuffixes'), parsedCmd.get('excludeDirs')),
+        videoFiles = findVideoFiles(parsedCmd.get('directories'), parsedCmd.get('videoSuffixes'), parsedCmd.get('excludeDirs')),
         videoFilesCalc = calcProcessCountForDir(videoFiles, parsedCmd.get('processCount')),
         totalPromise = getAllTotalTimesPromise(videoFilesCalc, parsedCmd),
         terseOutput = parsedCmd.get('terseOutput'),

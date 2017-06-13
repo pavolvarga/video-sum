@@ -1,14 +1,14 @@
 'use strict';
 
-const Immutable = require('immutable');
-const reader = require('./reader');
+import * as Immutable from 'immutable';
 
-const {DEFAULT_SUFFIXES, DEFAULT_PROCESS_COUNT} = require('./constants');
+import {readFileLines} from './reader';
+import {DEFAULT_SUFFIXES, DEFAULT_PROCESS_COUNT} from './constants';
 
 function processDirs({dir, list}) {
     const
         dirs = dir ? Immutable.Set(dir) : Immutable.Set(),
-        listed = list ? Immutable.Set(reader.readFileLines(list)) : Immutable.Set();
+        listed = list ? Immutable.Set(readFileLines(list)) : Immutable.Set();
 
     return dirs.union(listed);
 }
@@ -24,7 +24,7 @@ function processVideo(defaultVid, {addVid, removeVid}) {
         .subtract(removeVideo);
 }
 
-function parseCmd(options) {
+export function parseCmd(options) {
 
     const
         help = !!options['help'],
@@ -39,5 +39,3 @@ function parseCmd(options) {
 
     return Immutable.fromJS({help, directories: dirs, videoSuffixes, excludeDirs, printUnprocessedFiles, terseOutput, processCount, logErrors});
 }
-
-exports.parseCmd = parseCmd;

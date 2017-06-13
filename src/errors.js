@@ -3,7 +3,7 @@
 /**
  * FFprobe can't read video duration from an existing video file (probably the file is corrupted).
  */
-function ReadVideoFileError(file) {
+export function ReadVideoFileError(file) {
     this.name = ReadVideoFileError;
     this.message = `Unable to read duration from video file: ${file}`;
     this.videoFilePath = file;
@@ -11,5 +11,3 @@ function ReadVideoFileError(file) {
 }
 ReadVideoFileError.prototype = Object.create(Error.prototype);
 ReadVideoFileError.prototype.constructor = ReadVideoFileError;
-
-exports.ReadVideoFileError = ReadVideoFileError;

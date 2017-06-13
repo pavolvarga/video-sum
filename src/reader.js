@@ -1,8 +1,8 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const Immutable = require('immutable');
+import fs from 'fs';
+import path from 'path';
+import * as Immutable from 'immutable';
 
 function readVideoFilesInt(dir, suffixes, excludeDirs, array) {
     const files = fs.readdirSync(dir);
@@ -27,7 +27,7 @@ function readVideoFiles(path, suffixes, excludeDirs) {
     return Immutable.List(files);
 }
 
-function findVideoFiles(directories, videoSuffixes, excludeDirs) {
+export function findVideoFiles(directories, videoSuffixes, excludeDirs) {
     let data = Immutable.List();
 
     const suffixes = videoSuffixes.map(suf => `.${suf}`).toArray();
@@ -57,12 +57,9 @@ function findVideoFiles(directories, videoSuffixes, excludeDirs) {
     return data;
 }
 
-function readFileLines(filename) {
+export function readFileLines(filename) {
     return fs.readFileSync(filename, 'utf-8')
         .split('\n')
         .filter(Boolean)
         .map(l => l.trim());
 }
-
-exports.findVideoFiles = findVideoFiles;
-exports.readFileLines = readFileLines;

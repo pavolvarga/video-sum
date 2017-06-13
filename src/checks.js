@@ -1,8 +1,8 @@
 'use strict';
 
-const ceSync = require('command-exists').sync;
-const colors = require('colors/safe');
-const fs = require('fs');
+import {sync as ceSync} from 'command-exists';
+import colors from 'colors/safe';
+import fs from 'fs';
 
 function createMsgMissingProcess(name) {
     return `${colors.red(name)} was not found, it must be installed and on the PATH for ${colors.blue('video-sum')} to work`;
@@ -44,12 +44,10 @@ function checkInputFileReadable(file) {
     }
 }
 
-function checkPrerequisites(cmdOptions) {
+export function checkPrerequisites(cmdOptions) {
     checkProcesses();
     if (cmdOptions.list) {
         checkInputFileExists(cmdOptions.list);
         checkInputFileReadable(cmdOptions.list);
     }
 }
-
-exports.checkPrerequisites = checkPrerequisites;

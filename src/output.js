@@ -1,10 +1,10 @@
 'use strict';
 
-const moment = require('moment');
-const colors = require('colors/safe');
+import moment from 'moment';
+import colors from 'colors/safe';
 require('moment-duration-format');
 
-const {TIME_FORMAT} = require('./constants');
+import {TIME_FORMAT} from './constants';
 
 function formatTime(time) {
     return colors.red(moment.duration(time, 'seconds').format(TIME_FORMAT, {trim: false}));
@@ -17,7 +17,7 @@ function listErrFiles(errFiles) {
     }, '');
 }
 
-function formatDataFac(terseOutput, printUnprocessedFiles, dirNotFound, dirNotReadable) {
+export function formatDataFac(terseOutput, printUnprocessedFiles, dirNotFound, dirNotReadable) {
     if (dirNotFound) {
         return formatDirNotFound;
     }
@@ -52,5 +52,3 @@ function formatDataNormal(header, time, filesCount, errorFiles) {
 function formatDataUnprocessedFiles(header, time, filesCount, errorFiles) {
     return `${colors.blue(header)}\n \t- files count: ${filesCount}\n \t- errorFiles (${errorFiles.length}):\n ${listErrFiles(errorFiles)} \t- total time: ${formatTime(time)}\n`;
 }
-
-exports.formatDataFac = formatDataFac;

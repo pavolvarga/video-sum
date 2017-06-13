@@ -1,6 +1,6 @@
 'use strict';
 
-const {DEFAULT_SUFFIXES, DEFAULT_PROCESS_COUNT} = require('./constants');
+import {DEFAULT_SUFFIXES, DEFAULT_PROCESS_COUNT} from './constants';
 
 const options = [
     {
@@ -73,7 +73,7 @@ const options = [
     }
 ];
 
-const sections = [
+export const sections = [
     {
         header: 'Video Sum',
         content: `Command line app for summing lengths of video files.
@@ -101,5 +101,3 @@ const sections = [
         optionList: options
     }
 ];
-
-exports.sections = sections;
