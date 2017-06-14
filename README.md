@@ -43,13 +43,13 @@ Therefore both **ffmpeg** and **ffprobe** must be installed and on the **PATH**.
 To print all command line options run:
 
 ```sh
-node dist/vide-sum
+node dist/video-sum
 ```
 
 or 
 
 ```sh
-node dist/vide-sum --help
+node dist/video-sum --help
 ```
 ## Examples
 
@@ -58,7 +58,7 @@ node dist/vide-sum --help
 If you specify for example two directories with 12 files by using *--dir* option, you will get this kind of output
 
 ```sh
-node dist/vide-sum --dir '/path/to/directory/videos1' '/path/to/directory/videos2'
+node dist/video-sum --dir '/path/to/directory/videos1' '/path/to/directory/videos2'
 
 /path/to/directory/videos1
         - files count: 10 
