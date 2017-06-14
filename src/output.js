@@ -11,26 +11,7 @@ function formatTime(time) {
 }
 
 function listErrFiles(errFiles) {
-    return errFiles.reduce((acc, file) => {
-        acc += `\t\t- ${file}\n`;
-        return acc;
-    }, '');
-}
-
-export function formatDataFac(terseOutput, printUnprocessedFiles, dirNotFound, dirNotReadable) {
-    if (dirNotFound) {
-        return formatDirNotFound;
-    }
-    if (dirNotReadable) {
-        return formatDirNotReadable;
-    }
-    if (terseOutput) {
-        return formatDataTerse;
-    }
-    if (printUnprocessedFiles) {
-        return formatDataUnprocessedFiles;
-    }
-    return formatDataNormal;
+    return errFiles.reduce((acc, file) => acc + `\t\t- ${file}\n`, '');
 }
 
 function formatDirNotFound(header) {
@@ -51,4 +32,20 @@ function formatDataNormal(header, time, filesCount, errorFiles) {
 
 function formatDataUnprocessedFiles(header, time, filesCount, errorFiles) {
     return `${colors.blue(header)}\n \t- files count: ${filesCount}\n \t- errorFiles (${errorFiles.length}):\n ${listErrFiles(errorFiles)} \t- total time: ${formatTime(time)}\n`;
+}
+
+export function formatDataFac(terseOutput, printUnprocessedFiles, dirNotFound, dirNotReadable) {
+    if (dirNotFound) {
+        return formatDirNotFound;
+    }
+    if (dirNotReadable) {
+        return formatDirNotReadable;
+    }
+    if (terseOutput) {
+        return formatDataTerse;
+    }
+    if (printUnprocessedFiles) {
+        return formatDataUnprocessedFiles;
+    }
+    return formatDataNormal;
 }

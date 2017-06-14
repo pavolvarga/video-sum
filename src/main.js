@@ -49,7 +49,7 @@ function getTotalTimePromise(files, processCount, parsedCmd) {
     )
     .then(results => {
         return results.reduce((acc, result) => {
-            if (typeof  result === 'number') {
+            if (typeof result === 'number') {
                 return acc.update('time', old => old + result);
             }
             return acc.update('unprocessedFiles', old => old.push(result));

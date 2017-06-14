@@ -21,9 +21,9 @@ function readVideoFilesInt(dir, suffixes, excludeDirs, array) {
     });
 }
 
-function readVideoFiles(path, suffixes, excludeDirs) {
+function readVideoFiles(dirPath, suffixes, excludeDirs) {
     const files = [];
-    readVideoFilesInt(path, suffixes, excludeDirs, files);
+    readVideoFilesInt(dirPath, suffixes, excludeDirs, files);
     return Immutable.List(files);
 }
 

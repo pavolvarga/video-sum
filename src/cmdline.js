@@ -27,7 +27,7 @@ function processVideo(defaultVid, {addVid, removeVid}) {
 export function parseCmd(options) {
 
     const
-        help = !!options['help'],
+        help = !!options.help,
         dirs = processDirs(options),
         vidOptions = {addVid: options['add-video'], removeVid: options['remove-video']},
         videoSuffixes = processVideo(DEFAULT_SUFFIXES, vidOptions),
