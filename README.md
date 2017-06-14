@@ -21,10 +21,16 @@ Go to the directory:
 cd video-sum
 ```
 
-Then install dependencies:
+Install dependencies:
 
 ```sh
 npm install
+```
+
+Build:
+
+```sh
+npm run build
 ```
 
 ## Usage
@@ -37,13 +43,13 @@ Therefore both **ffmpeg** and **ffprobe** must be installed and on the **PATH**.
 To print all command line options run:
 
 ```sh
-node src/main
+node dist/vide-sum
 ```
 
 or 
 
 ```sh
-node src/main --help
+node dist/vide-sum --help
 ```
 ## Examples
 
@@ -52,7 +58,7 @@ node src/main --help
 If you specify for example two directories with 12 files by using *--dir* option, you will get this kind of output
 
 ```sh
-node src/main --dir '/path/to/directory/videos1' '/path/to/directory/videos2'
+node dist/vide-sum --dir '/path/to/directory/videos1' '/path/to/directory/videos2'
 
 /path/to/directory/videos1
         - files count: 10 
