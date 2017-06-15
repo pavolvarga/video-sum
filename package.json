@@ -29,18 +29,20 @@
   "devDependencies": {
     "babel-core": "6.25.0",
     "babel-loader": "7.0.0",
+    "babel-plugin-add-filehash": "6.9.4",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-polyfill": "6.23.0",
     "babel-preset-env": "1.5.2",
     "eslint": "3.19.0",
+    "eslint-loader": "1.8.0",
+    "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
     "webpack": "2.6.1",
     "webpack-node-externals": "1.6.0"
   },
   "scripts": {
-    "clean": "./node_modules/.bin/rimraf dist/",
-    "eslint": "./node_modules/.bin/eslint src",
-    "prebuild": "npm run clean && npm run eslint",
-    "build": "./node_modules/.bin/webpack"
+    "clean": "rimraf dist/ .eslintcache",
+    "build": "npm run clean && webpack --progress",
+    "watch": "node_modules/.bin/webpack --watch --progress"
   }
 }
