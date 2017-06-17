@@ -5,7 +5,8 @@
     },
     "env": {
         "es6": true,
-        "node": true
+        "node": true,
+        "jest/globals": true
     },
     "extends": "eslint:recommended",
     "rules": {
@@ -94,5 +95,6 @@
         "space-unary-ops": ["error", {"words": true, "nonwords": false}],
         "no-var": "error",
         "generator-star-spacing": ["error", "before"]
-    }
+    },
+    "plugins": ["jest"]
 }

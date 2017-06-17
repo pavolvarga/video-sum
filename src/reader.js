@@ -57,6 +57,9 @@ export function findVideoFiles(directories, videoSuffixes, excludeDirs) {
     return data;
 }
 
+/**
+ * Reads non empty lines from a text file, trim them and return them in an array.
+ */
 export function readFileLines(filename) {
     return fs.readFileSync(filename, 'utf-8')
         .split('\n')

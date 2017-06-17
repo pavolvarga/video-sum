@@ -1,3 +1,4 @@
 {
-  "plugins": ["add-filehash"]
+  "plugins": ["add-filehash"],
+  "presets": ["es2015"]
 }
