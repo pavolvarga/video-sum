@@ -27,6 +27,15 @@ function readVideoFiles(dirPath, suffixes, excludeDirs) {
     return Immutable.List(files);
 }
 
+/**
+ * Find all video files in each input directory.
+ * For each directory it will create a map with list of paths to found video files, error flags and name of directory.
+ *
+ * @param directories - directories to search through
+ * @param videoSuffixes - list of file suffixes for video files
+ * @param excludeDirs - set of directory names to exclude (any dir name will be tested against it, including an input dir)
+ * @returns {List<any>|List<T>|*} a list of maps
+ */
 export function findVideoFiles(directories, videoSuffixes, excludeDirs) {
     let data = Immutable.List();
 
@@ -46,6 +55,11 @@ export function findVideoFiles(directories, videoSuffixes, excludeDirs) {
         }
         catch(err) {
             data = data.push(Immutable.fromJS({dir, files: [], dirNotReadable: true}));
+            return;
+        }
+
+        //input dir is in the exclude dirs - ignore it
+        if (excludeDirs.includes(path.basename(dir))) {
             return;
         }
 
