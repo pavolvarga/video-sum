@@ -1,9 +1,11 @@
 'use strict';
 
 import * as Immutable from 'immutable';
+import cla from 'command-line-args';
 
 import {readFileLines} from './reader';
-import {DEFAULT_SUFFIXES, DEFAULT_PROCESS_COUNT} from './constants';
+import {DEFAULT_SUFFIXES, DEFAULT_PROCESS_COUNT, CMD_LINE_OPTION_DEFINITIONS} from './constants';
+import {checkPrerequisites} from './checks';
 
 function processDirs({dir, list}) {
     const
@@ -24,7 +26,11 @@ function processVideo(defaultVid, {addVid, removeVid}) {
         .subtract(removeVideo);
 }
 
-export function parseCmd(options) {
+export function parseCmd(argv) {
+
+    const options = cla(CMD_LINE_OPTION_DEFINITIONS, argv);
+
+    checkPrerequisites(options);
 
     const
         help = !!options.help,

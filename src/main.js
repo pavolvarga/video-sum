@@ -6,15 +6,12 @@ import ffmpeg from 'fluent-ffmpeg';
 import Promise from 'bluebird';
 import * as Immutable from 'immutable';
 import getUsage from 'command-line-usage';
-import cla from 'command-line-args';
 
 import {parseCmd} from './cmdline.js';
 import {findVideoFiles} from './reader.js';
 import {formatDataFac} from './output';
 import {ReadVideoFileError} from './errors';
 import {sections} from './usage';
-import {CMD_LINE_OPTION_DEFINITIONS} from './constants';
-import {checkPrerequisites} from './checks';
 
 function readDuration(file, parsedCmd) {
     return new Promise(
@@ -104,11 +101,7 @@ function calcProcessCountForDir(videoFiles, processCount) {
 
 function main() {
 
-    const cmdOptions = cla(CMD_LINE_OPTION_DEFINITIONS);
-
-    checkPrerequisites(cmdOptions);
-
-    const parsedCmd = parseCmd(cmdOptions);
+    const parsedCmd = parseCmd(process.argv);
 
     //no cmd options or the help option
     if (process.argv.slice(2).length === 0 || parsedCmd.get('help')) {
