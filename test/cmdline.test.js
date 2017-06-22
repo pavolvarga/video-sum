@@ -147,4 +147,47 @@ describe('correctly parses cmd options', () => {
         expect(parseCmd(createCmd(['-e']))).toEqualImmutable(expected);
         expect(parseCmd(createCmd(['--log-errors']))).toEqualImmutable(expected);
     });
+
+    test('when both `-a` and `-r` options were used', () => {
+
+        const
+            cmd = createCmd(['-a', 'mp5', 'mp6', '-r', 'avi', 'mkv']),
+            expectedSuffixes = DEFAULT_SUFFIXES.add('mp5').add('mp6').remove('avi').remove('mkv'),
+            expected = createExp(false, [], expectedSuffixes, [], false, false, DEFAULT_PROCESS_COUNT, false);
+
+        expect(parseCmd(cmd)).toEqualImmutable(expected);
+    });
+
+    test('when `-s` or `--set-video` was used', () => {
+
+        const
+            suffixes = ['mp5', 'mp6'],
+            cmdShort = createCmd(['-s', ...suffixes]),
+            cmdLong = createCmd(['--set-video', ...suffixes]),
+            expected = createExp(false, [], suffixes, [], false, false, DEFAULT_PROCESS_COUNT, false);
+
+        expect(parseCmd(cmdShort)).toEqualImmutable(expected);
+        expect(parseCmd(cmdLong)).toEqualImmutable(expected);
+    });
+
+    test('when both `-a` and `-s` options were used', () => {
+
+        const
+            cmd = createCmd(['-a', 'mp5', 'mp6', '-s', 'avi']),
+            expected = createExp(false, [], ['avi'], [], false, false, DEFAULT_PROCESS_COUNT, false);
+
+        expect(parseCmd(cmd)).toEqualImmutable(expected);
+
+    });
+
+    test('when both `-r` and `-s` options were used', () => {
+
+        const
+            cmd = createCmd(['-a', 'mkv', 'webm', '-s', 'avi']),
+            expected = createExp(false, [], ['avi'], [], false, false, DEFAULT_PROCESS_COUNT, false);
+
+        expect(parseCmd(cmd)).toEqualImmutable(expected);
+
+    });
+
 });

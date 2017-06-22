@@ -40,6 +40,15 @@ const options = [
         description: 'List of file suffixes for video files to remove from the default list.'
     },
     {
+        name: 'set-video',
+        alias: 's',
+        multiple: true,
+        typeLabel: '[underline]{file suffix}...',
+        description: `Replace default list of video files suffixes. If this option is used with 
+                      [bold]{add-video} or [bold]{remove-video} options it takes precedence and values provided for these two options are ignored.
+                      If no file suffix is provided then no video file will be found.`
+    },
+    {
         name: 'exclude-dirs',
         alias: 'x',
         multiple: true,
@@ -78,7 +87,7 @@ export const sections = [
         header: 'Video Sum',
         content: `Command line app for summing lengths of video files.
         
-                  Application requires [bold]{ffmpeg} to be installed and added to PATH for its function.
+                  Application requires [bold]{ffmpeg} to be installed and added to [bold]{PATH} for its function.
         
                   You specify which directories to check by using [underline]{--dir} or [underline]{--list} option.
                   Application finds all video files in these input directories by checking file suffixes.
@@ -93,8 +102,7 @@ export const sections = [
                   
                   By default it spawns ${DEFAULT_PROCESS_COUNT} ffprobe process. You can change this value by using the [underline]{--process-count} option.
                   These processes are distributed among input directories based on number of video files they contain.
-                  If you use more input directories than the process count, then process count value is ignored and for each input directory a single
-                  ffprobe process will run.`
+                  If you use more input directories than the process count, then process count value is ignored and for each input directory a single ffprobe process will run.`
     },
     {
         header: 'Options',

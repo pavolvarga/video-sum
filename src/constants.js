@@ -10,6 +10,7 @@ export const CMD_LINE_OPTION_DEFINITIONS = [
     { name: 'list', alias: 'l', type: String },
     { name: 'add-video', alias: 'a', multiple: true},
     { name: 'remove-video', alias: 'r', multiple: true},
+    { name: 'set-video', alias: 's', multiple: true},
     { name: 'exclude-dirs', alias: 'x', multiple: true},
     { name: 'print-unprocessed-files', alias: 'u', type: Boolean},
     { name: 'terse-output', alias: 't', type: Boolean},

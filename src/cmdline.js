@@ -15,11 +15,15 @@ function processDirs({dir, list}) {
     return dirs.union(listed);
 }
 
-function processVideo(defaultVid, {addVid, removeVid}) {
+function processVideo(defaultVideo, {addVid, removeVid, setVid}) {
     const
-        defaultVideo = defaultVid ? Immutable.Set(defaultVid) : Immutable.Set(),
         addVideo = addVid ? Immutable.Set(addVid) : Immutable.Set(),
-        removeVideo = removeVid ? Immutable.Set(removeVid) : Immutable.Set();
+        removeVideo = removeVid ? Immutable.Set(removeVid) : Immutable.Set(),
+        setVideo = setVid ? Immutable.Set(setVid) : Immutable.Set();
+
+    if (!setVideo.isEmpty()) {
+        return setVideo;
+    }
 
     return defaultVideo
         .union(addVideo)
@@ -35,7 +39,7 @@ export function parseCmd(argv) {
     const
         help = !!options.help,
         dirs = processDirs(options),
-        vidOptions = {addVid: options['add-video'], removeVid: options['remove-video']},
+        vidOptions = {addVid: options['add-video'], removeVid: options['remove-video'], setVid: options['set-video']},
         videoSuffixes = processVideo(DEFAULT_SUFFIXES, vidOptions),
         excludeDirs = options['exclude-dirs'] ? Immutable.Set(options['exclude-dirs']) : Immutable.Set(),
         printUnprocessedFiles = !!options['print-unprocessed-files'],
