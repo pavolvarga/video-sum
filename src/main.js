@@ -153,9 +153,14 @@ function main() {
             unprocessedFilesTotal = unprocessedFilesTotal.concat(unprocessedFiles);
         });
 
-        const formatDataResult = formatDataFac(terseOutput, printUnprocessedFiles);
-        console.log(formatDataResult('Total', sumTime, filesCount, unprocessedFilesTotal));
+        //print total line only if more than one input directory was specified
+        if (result.length > 1) {
+            const formatDataResult = formatDataFac(terseOutput, printUnprocessedFiles);
+            console.log(formatDataResult('Total', sumTime, filesCount, unprocessedFilesTotal));
+        }
+
         printExecutionTime(printExecTime, execStart);
+
     })();
 }
 
