@@ -32,20 +32,31 @@ function processVideo(defaultVideo, {addVid, removeVid, setVid}) {
 
 export function parseCmd(argv) {
 
-    const options = cla(CMD_LINE_OPTION_DEFINITIONS, argv);
+    try {
 
-    checkPrerequisites(options);
+        const options = cla(CMD_LINE_OPTION_DEFINITIONS, argv);
 
-    const
-        help = !!options.help,
-        dirs = processDirs(options),
-        vidOptions = {addVid: options['add-video'], removeVid: options['remove-video'], setVid: options['set-video']},
-        videoSuffixes = processVideo(DEFAULT_SUFFIXES, vidOptions),
-        excludeDirs = options['exclude-dirs'] ? Immutable.Set(options['exclude-dirs']) : Immutable.Set(),
-        printUnprocessedFiles = !!options['print-unprocessed-files'],
-        terseOutput = !!options['terse-output'],
-        processCount = options['process-count'] ? options['process-count'] : DEFAULT_PROCESS_COUNT,
-        logErrors = !!options['log-errors'];
+        checkPrerequisites(options);
 
-    return Immutable.fromJS({help, directories: dirs, videoSuffixes, excludeDirs, printUnprocessedFiles, terseOutput, processCount, logErrors});
+        const
+            help = !!options.help,
+            dirs = processDirs(options),
+            vidOptions = {addVid: options['add-video'], removeVid: options['remove-video'], setVid: options['set-video']},
+            videoSuffixes = processVideo(DEFAULT_SUFFIXES, vidOptions),
+            excludeDirs = options['exclude-dirs'] ? Immutable.Set(options['exclude-dirs']) : Immutable.Set(),
+            printUnprocessedFiles = !!options['print-unprocessed-files'],
+            terseOutput = !!options['terse-output'],
+            processCount = options['process-count'] ? options['process-count'] : DEFAULT_PROCESS_COUNT,
+            logErrors = !!options['log-errors'];
+
+        return Immutable.fromJS({help, directories: dirs, videoSuffixes, excludeDirs, printUnprocessedFiles, terseOutput, processCount, logErrors});
+    }
+    catch (err) {
+
+        if (err.name === 'UNKNOWN_OPTION') {
+            return Immutable.fromJS({error: err.message});
+        }
+
+        throw err;
+    }
 }

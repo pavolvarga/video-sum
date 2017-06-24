@@ -6,6 +6,7 @@ import ffmpeg from 'fluent-ffmpeg';
 import Promise from 'bluebird';
 import * as Immutable from 'immutable';
 import getUsage from 'command-line-usage';
+import colors from 'colors/safe';
 
 import {parseCmd} from './cmdline.js';
 import {findVideoFiles} from './reader.js';
@@ -99,7 +100,7 @@ function calcProcessCountForDir(videoFiles, processCount) {
     return videoFiles.map(vf => vf.set('processCount', Math.ceil(vf.get('files').size * ratio)));
 }
 
-function main() {
+function processCmd() {
 
     const parsedCmd = parseCmd(process.argv);
 
@@ -109,12 +110,25 @@ function main() {
         process.exit();
     }
 
+    //unknown cmd option
+    if (parsedCmd.get('error')) {
+        console.log(`${colors.red(parsedCmd.get('error'))}, valid options are: `);
+        console.log(getUsage(sections[1]));
+        process.exit();
+    }
+
+    return parsedCmd;
+}
+
+function main() {
+
     const
-        videoFiles = findVideoFiles(parsedCmd.get('directories'), parsedCmd.get('videoSuffixes'), parsedCmd.get('excludeDirs')),
-        videoFilesCalc = calcProcessCountForDir(videoFiles, parsedCmd.get('processCount')),
-        totalPromise = getAllTotalTimesPromise(videoFilesCalc, parsedCmd),
-        terseOutput = parsedCmd.get('terseOutput'),
-        printUnprocessedFiles = parsedCmd.get('printUnprocessedFiles');
+        cmd = processCmd(),
+        videoFiles = findVideoFiles(cmd.get('directories'), cmd.get('videoSuffixes'), cmd.get('excludeDirs')),
+        videoFilesCalc = calcProcessCountForDir(videoFiles, cmd.get('processCount')),
+        totalPromise = getAllTotalTimesPromise(videoFilesCalc, cmd),
+        terseOutput = cmd.get('terseOutput'),
+        printUnprocessedFiles = cmd.get('printUnprocessedFiles');
 
     (async () => {
         const result = await totalPromise;

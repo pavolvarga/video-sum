@@ -190,4 +190,13 @@ describe('correctly parses cmd options', () => {
 
     });
 
+    test('when unknown option was used', () => {
+
+        //z is not specified in option list definition
+        const
+            cmd = createCmd(['-z']),
+            expected = Immutable.fromJS({error: 'Unknown option: -z'});
+
+        expect(parseCmd(cmd)).toEqualImmutable(expected);
+    });
 });
