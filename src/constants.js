@@ -15,9 +15,12 @@ export const CMD_LINE_OPTION_DEFINITIONS = [
     { name: 'print-unprocessed-files', alias: 'u', type: Boolean},
     { name: 'terse-output', alias: 't', type: Boolean},
     { name: 'process-count', alias: 'p', type: Number},
-    { name: 'log-errors', alias: 'e', type: Boolean}
+    { name: 'log-errors', alias: 'e', type: Boolean},
+    { name: 'print-execution-time', alias: 'm', type: Boolean}
 ];
 
-export const TIME_FORMAT = 'y[y] M[m] w[w] d[d] h[h] mm[m] ss[s]';
+export const VIDEO_TIME_FORMAT = 'y[y] M[m] w[w] d[d] h[h] mm[m] ss[s]';
 
 export const DEFAULT_PROCESS_COUNT = 100;
+
+export const EXEC_TIME_FORMAT = 'h[h] mm[m] ss[s] SSS[ms]';

@@ -10,7 +10,7 @@ import colors from 'colors/safe';
 
 import {parseCmd} from './cmdline.js';
 import {findVideoFiles} from './reader.js';
-import {formatDataFac} from './output';
+import {formatDataFac, printExecutionTime} from './output';
 import {ReadVideoFileError} from './errors';
 import {sections} from './usage';
 
@@ -122,13 +122,16 @@ function processCmd() {
 
 function main() {
 
+    const execStart = process.hrtime();
+
     const
         cmd = processCmd(),
         videoFiles = findVideoFiles(cmd.get('directories'), cmd.get('videoSuffixes'), cmd.get('excludeDirs')),
         videoFilesCalc = calcProcessCountForDir(videoFiles, cmd.get('processCount')),
         totalPromise = getAllTotalTimesPromise(videoFilesCalc, cmd),
         terseOutput = cmd.get('terseOutput'),
-        printUnprocessedFiles = cmd.get('printUnprocessedFiles');
+        printUnprocessedFiles = cmd.get('printUnprocessedFiles'),
+        printExecTime = cmd.get('printExecutionTime');
 
     (async () => {
         const result = await totalPromise;
@@ -152,6 +155,7 @@ function main() {
 
         const formatDataResult = formatDataFac(terseOutput, printUnprocessedFiles);
         console.log(formatDataResult('Total', sumTime, filesCount, unprocessedFilesTotal));
+        printExecutionTime(printExecTime, execStart);
     })();
 }
 

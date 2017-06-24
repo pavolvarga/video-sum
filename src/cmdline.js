@@ -47,9 +47,11 @@ export function parseCmd(argv) {
             printUnprocessedFiles = !!options['print-unprocessed-files'],
             terseOutput = !!options['terse-output'],
             processCount = options['process-count'] ? options['process-count'] : DEFAULT_PROCESS_COUNT,
-            logErrors = !!options['log-errors'];
+            logErrors = !!options['log-errors'],
+            printExecutionTime = !!options['print-execution-time'];
 
-        return Immutable.fromJS({help, directories: dirs, videoSuffixes, excludeDirs, printUnprocessedFiles, terseOutput, processCount, logErrors});
+        return Immutable.fromJS({help, directories: dirs, videoSuffixes, excludeDirs,
+            printUnprocessedFiles, terseOutput, processCount, logErrors, printExecutionTime});
     }
     catch (err) {
 

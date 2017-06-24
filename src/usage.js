@@ -79,6 +79,12 @@ const options = [
         alias: 'e',
         type: Boolean,
         description: 'Print all errors to stderr (for example why a video file could not be open).'
+    },
+    {
+        name: 'print-execution-time',
+        alias: 'm',
+        type: Boolean,
+        description: 'Print execution time at the end of output.'
     }
 ];
 
