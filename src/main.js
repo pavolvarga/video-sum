@@ -10,7 +10,7 @@ import colors from 'colors/safe';
 
 import {parseCmd} from './cmdline.js';
 import {findVideoFiles} from './reader.js';
-import {formatDataFac, printExecutionTime} from './output';
+import {createOutput, createTotalOutput, createExecOutput, print} from './output';
 import {ReadVideoFileError} from './errors';
 import {sections} from './usage';
 
@@ -134,32 +134,24 @@ function main() {
         printExecTime = cmd.get('printExecutionTime');
 
     (async () => {
+
         const result = await totalPromise;
 
-        let
-            sumTime = 0,
-            filesCount = 0,
-            unprocessedFilesTotal = [];
+        const
+            resultWitOutput = result.map(val => val.set('output', createOutput(val, terseOutput, printUnprocessedFiles))),
+            total = resultWitOutput.reduce(
+                (acc, el) => acc
+                    .update('time', time => time + el.get('time'))
+                    .update('filesCount', filesCount => filesCount + el.get('files').size)
+                    .update('unprocessedFiles', unprocessedFiles => unprocessedFiles.concat(el.get('unprocessedFiles'))),
+                Immutable.fromJS({time: 0, filesCount: 0, unprocessedFiles: []})
+            ),
+            totalWithOutput = total.set('output', createTotalOutput(total, terseOutput, printUnprocessedFiles)),
+            execTimeOutput = createExecOutput(process.hrtime(execStart));
 
-        result.forEach(val => {
-            const
-                {dir, time, files, unprocessedFiles, dirNotFound, dirNotReadable} = val.toJS(),
-                formatData = formatDataFac(terseOutput, printUnprocessedFiles, dirNotFound, dirNotReadable);
+        console.log(Immutable.List.isList(resultWitOutput));
 
-            console.log(formatData(dir, time, files.length, unprocessedFiles));
-
-            sumTime += time;
-            filesCount += files.length;
-            unprocessedFilesTotal = unprocessedFilesTotal.concat(unprocessedFiles);
-        });
-
-        //print total line only if more than one input directory was specified
-        if (result.length > 1) {
-            const formatDataResult = formatDataFac(terseOutput, printUnprocessedFiles);
-            console.log(formatDataResult('Total', sumTime, filesCount, unprocessedFilesTotal));
-        }
-
-        printExecutionTime(printExecTime, execStart);
+        print(resultWitOutput, totalWithOutput, printExecTime, execTimeOutput);
 
     })();
 }

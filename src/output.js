@@ -14,57 +14,68 @@ function listErrFiles(errFiles) {
     return errFiles.reduce((acc, file) => acc + `\t\t- ${file}\n`, '');
 }
 
-function formatDirNotFound(header) {
-    return `${header}: Directory was not found`;
-}
-
-function formatDirNotReadable(header) {
-    return `${header}: Directory is not readable`;
-}
-
-function formatDataTerse(header, time) {
-    return `${header}: ${formatTime(time)}`;
-}
-
-function formatDataNormal(header, time, filesCount, errorFiles) {
-    return `${colors.blue(header)}\n \t- files count: ${filesCount}\n \t- errorFiles count: ${errorFiles.length}\n \t- total time: ${formatTime(time)}\n`;
-}
-
-function formatDataUnprocessedFiles(header, time, filesCount, errorFiles) {
-    return `${colors.blue(header)}\n \t- files count: ${filesCount}\n \t- errorFiles (${errorFiles.length}):\n ${listErrFiles(errorFiles)} \t- total time: ${formatTime(time)}\n`;
-}
-
-export function formatDataFac(terseOutput, printUnprocessedFiles, dirNotFound, dirNotReadable) {
-    if (dirNotFound) {
-        return formatDirNotFound;
-    }
-    if (dirNotReadable) {
-        return formatDirNotReadable;
-    }
-    if (terseOutput) {
-        return formatDataTerse;
-    }
-    if (printUnprocessedFiles) {
-        return formatDataUnprocessedFiles;
-    }
-    return formatDataNormal;
-}
-
-/**
- * If the `print` is true, it prints execution time to stdout.
- * The `execStart` is process.hrtime when app started.
- */
-export function printExecutionTime(print, execStart) {
-
-    if (!print) {
-        return;
-    }
+export function createOutput(calcResult, terseOutput, printUnprocessedFiles) {
 
     const
-        execEnd = process.hrtime(execStart),
+        dir = calcResult.get('dir'),
+        time = calcResult.get('time'),
+        files = calcResult.get('files'),
+        unprocessedFiles = calcResult.get('unprocessedFiles'),
+        dirNotFound = calcResult.get('dirNotFound'),
+        dirNotReadable = calcResult.get('dirNotReadable');
+
+    if (dirNotFound) {
+        return `${dir}: Directory was not found`;
+    }
+    else if (dirNotReadable) {
+        return `${dir}: Directory is not readable`;
+    }
+    else if (terseOutput) {
+        return `${dir}: ${formatTime(time)}`;
+    }
+    else if (printUnprocessedFiles) {
+        return `${dir}\n \t- files count: ${files.size}\n \t- error files (${unprocessedFiles.size}):\n ${listErrFiles(unprocessedFiles)} \t- total time: ${formatTime(time)}`;
+    }
+
+    return `${dir}\n \t- files count: ${files.size}\n \t- error files count: ${unprocessedFiles.size}\n \t- total time: ${formatTime(time)}`;
+}
+
+export function createTotalOutput(total, terseOutput, printUnprocessedFiles) {
+
+    const
+        time = total.get('time'),
+        filesCount = total.get('filesCount'),
+        unprocessedFiles = total.get('unprocessedFiles');
+
+    if (terseOutput) {
+        return `${colors.blue('Total')}: ${formatTime(time)}`;
+    }
+    else if (printUnprocessedFiles) {
+        return `${colors.blue('Total')}\n \t- files count: ${filesCount}\n \t- error files (${unprocessedFiles.size}):\n ${listErrFiles(unprocessedFiles)} \t- total time: ${formatTime(time)}`;
+    }
+
+    return `${colors.blue('Total')}\n \t- files count: ${filesCount}\n \t- error files count: ${unprocessedFiles.size}\n \t- total time: ${formatTime(time)}`;
+}
+
+export function createExecOutput(execTime) {
+
+    const
         //get time in milliseconds
-        time = execEnd[0] * 1000 + execEnd[1] / 1000000,
+        time = execTime[0] * 1000 + execTime[1] / 1000000,
         formatted = moment.duration(time, 'milliseconds').format(EXEC_TIME_FORMAT);
 
-    console.log(colors.yellow(`Execution time: ${formatted}`));
+    return (colors.yellow(`Execution time: ${formatted}`));
+}
+
+export function print(results, total, printExec, exec) {
+
+    results.forEach(val => console.log(val.get('output')));
+
+    if(results.length > 1) {
+        console.log(total.get('output'));
+    }
+
+    if(printExec) {
+        console.log(exec);
+    }
 }
