@@ -98,13 +98,14 @@ export const sections = [
                   You specify which directories to check by using [underline]{--dir} or [underline]{--list} option.
                   Application finds all video files in these input directories by checking file suffixes.
                   It then spawns multiple [bold]{ffprobe} process for opening all found video files and reading theirs video lengths. 
-                  At the end it prints sum of video lengths per input directory and total sum of for all directories.
+                  At the end it prints sum of video lengths per input directory and total sum of for all directories if more than one input directory was used.
                   You can use [underline]{--dir} together with [underline]{--list}. If a directory is listed twice, it is counted only once.
                   
                   By default it uses these suffixes for deciding if a file is a video file: 
                   ${DEFAULT_SUFFIXES.toArray()}.
                   You can add additional suffix to this list by using [underline]{--add-video} option or 
                   remove suffix from this list by using [underline]{--remove-video} option.
+                  Use [underline]{--set-video} option to replace this list with your own.
                   
                   By default it spawns ${DEFAULT_PROCESS_COUNT} ffprobe process. You can change this value by using the [underline]{--process-count} option.
                   These processes are distributed among input directories based on number of video files they contain.
@@ -113,5 +114,9 @@ export const sections = [
     {
         header: 'Options',
         optionList: options
+    },
+    {
+        header: 'Misc',
+        content: 'Project home: [underline]{https://github.com/pavolvarga/video-sum}'
     }
 ];
