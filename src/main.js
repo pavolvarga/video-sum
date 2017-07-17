@@ -149,8 +149,6 @@ function main() {
             totalWithOutput = total.set('output', createTotalOutput(total, terseOutput, printUnprocessedFiles)),
             execTimeOutput = createExecOutput(process.hrtime(execStart));
 
-        console.log(Immutable.List.isList(resultWitOutput));
-
         print(resultWitOutput, totalWithOutput, printExecTime, execTimeOutput);
 
     })();
