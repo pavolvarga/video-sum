@@ -15,7 +15,6 @@ App is written in [node.js](https://nodejs.org/en/), therefore you must install 
 You also must have **node** and **npm** executables on the **PATH**.
 It uses [ffmpeg](http://www.ffmpeg.org/) for opening and reading metadata from video files.
 Therefore both **ffmpeg** and **ffprobe** must be installed and on the **PATH**.
-Clone this repository:
 
 ### Installation
 
@@ -57,7 +56,7 @@ node dist/video-sum --help
 
 ### Examples
 
-**Specifying input directories on command line**
+**Specifying input directories on command line**<br></br>
 If you specify for example two directories with 12 files by using *--dir* option, you will get this kind of output:
 
 ```sh
@@ -77,8 +76,8 @@ Total
         - total time: 0y 0m 0w 0d 11h 49m 50s
 ```
 
-**Specifying input directories through input file**
-If you specify a file (named *list*) with paths to two directories (same as above), you will get same output:
+**Specifying input directories through input file**<br></br>
+If you specify a file with paths to two directories (same as above), you will get same output:
 
 ```sh
 node dist/video-sum -l list
@@ -109,7 +108,7 @@ Pull the latest image from the docker hub:
 docker pull pavolvarga1024/video-sum
 ```
 
-Tag the image so that you don't have use full name *pavolvarga1024/video-sum*. This step is optional.
+Tag the image so that you don't have use full name *pavolvarga1024/video-sum*. This step is optional.<br></br>
 If you prefer using full name, then skip next step and replace *video-sum* with *pavolvarga1024/video-sum* in following commands.
 
 ```sh
@@ -136,11 +135,12 @@ docker container run video-sum --help
 Because the video-sum is reading directories on host's filesystem, you must use docker [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) to allow
 access to them.
 
-**Specifying input directories on command line**
+**Specifying input directories on command line**<br></br>
 If you specify for example two directories with 12 files by using *--dir* option, you will get this kind of output:
 
 ```sh
-docker container run -v /path/to/directory/videos1:/videos1 -v /path/to/directory/videos2:/videos2 video-sum --dir /videos1 /videos2
+docker container run -v /path/to/directory/videos1:/videos1 -v /path/to/directory/videos2:/videos2 \
+    video-sum --dir /videos1 /videos2
 
 /videos1
         - files count: 10
@@ -158,11 +158,13 @@ Total
 
 You must mount each directory you wish video-sum to access.
 
-**Specifying input directories through input file**
-If you specify a file (named *list*) with paths to two directories (same as above), you will get same output:
+**Specifying input directories through input file**<br></br>
+If you specify a file with paths to two directories (same as above), you will get same output:
 
 ```sh
-docker container run -v $(pwd)/list -v /path/to/directory/videos1:/videos1 -v /path/to/directory/videos2:/videos2 video-sum --dir /videos1 /videos2
+docker container run -v $(pwd)/list \
+    -v /path/to/directory/videos1:/videos1 -v /path/to/directory/videos2:/videos2 \
+    video-sum --dir /videos1 /videos2
 
 /videos1
         - files count: 10
@@ -178,7 +180,7 @@ Total
         - total time: 0y 0m 0w 0d 11h 49m 50s
 ```
 
-You must mount the input file (*$(pwd)/list*) and each directory it references.
+You must mount the input file and each directory it references.
 
 # License
 
