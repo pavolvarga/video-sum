@@ -2,7 +2,7 @@
 
 Command line app for summing lengths of all video files in specific directories.
 App is given list of directories, which it traverse through to find all video files.
-It then sums their lengths together and print total time.
+It then sums their lengths together and prints total time.
 
 # Usage
 
@@ -76,7 +76,7 @@ Total
         - total time: 0y 0m 0w 0d 11h 49m 50s
 ```
 
-**Specify input directories in input file**<br></br>
+**Specify input directories in input file**</br>
 If you specify a file (named *list* in the example) with paths to directories (for example same paths as above), you will get same output:
 
 ```sh
