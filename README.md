@@ -7,7 +7,7 @@ It then sums their lengths together and print total time.
 # Usage
 
 You can install and run the application directly on your computer.
-Or you can use docker and use existing image.
+Or you can use docker and use an existing image.
 
 ## Direct usage
 
@@ -56,7 +56,7 @@ node dist/video-sum --help
 
 ### Examples
 
-**Specifying input directories on command line**<br></br>
+**Specify input directories on command line**</br>
 If you specify for example two directories with 12 files by using *--dir* option, you will get this kind of output:
 
 ```sh
@@ -76,8 +76,8 @@ Total
         - total time: 0y 0m 0w 0d 11h 49m 50s
 ```
 
-**Specifying input directories through input file**<br></br>
-If you specify a file with paths to two directories (same as above), you will get same output:
+**Specify input directories in input file**<br></br>
+If you specify a file (named *list* in the example) with paths to directories (for example same paths as above), you will get same output:
 
 ```sh
 node dist/video-sum -l list
@@ -108,8 +108,8 @@ Pull the latest image from the docker hub:
 docker pull pavolvarga1024/video-sum
 ```
 
-Tag the image so that you don't have use full name *pavolvarga1024/video-sum*. This step is optional.<br></br>
-If you prefer using full name, then skip next step and replace *video-sum* with *pavolvarga1024/video-sum* in following commands.
+Tag the image so that you don't have use full name *pavolvarga1024/video-sum*. This step is optional.</br>
+If you prefer using full name, then skip this step and replace *video-sum* with *pavolvarga1024/video-sum* in following commands.
 
 ```sh
 docker image tag pavolvarga1024/video-sum:latest video-sum:latest
@@ -135,11 +135,13 @@ docker container run video-sum --help
 Because the video-sum is reading directories on host's filesystem, you must use docker [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) to allow
 access to them.
 
-**Specifying input directories on command line**<br></br>
+**Specify input directories on command line**</br>
 If you specify for example two directories with 12 files by using *--dir* option, you will get this kind of output:
 
 ```sh
-docker container run -v /path/to/directory/videos1:/videos1 -v /path/to/directory/videos2:/videos2 \
+docker container run \
+    -v /path/to/directory/videos1:/videos1 \
+    -v /path/to/directory/videos2:/videos2 \
     video-sum --dir /videos1 /videos2
 
 /videos1
@@ -156,14 +158,16 @@ Total
         - total time: 0y 0m 0w 0d 11h 49m 50s
 ```
 
-You must mount each directory you wish video-sum to access.
+You must mount each directory video-sum is supposed to access.
 
-**Specifying input directories through input file**<br></br>
-If you specify a file with paths to two directories (same as above), you will get same output:
+**Specify input directories through input file**</br>
+If you specify a file (named *list* in the example) with paths to directories (for example same paths as above), you will get same output:
 
 ```sh
-docker container run -v $(pwd)/list \
-    -v /path/to/directory/videos1:/videos1 -v /path/to/directory/videos2:/videos2 \
+docker container run \
+    -v $(pwd)/list \
+    -v /path/to/directory/videos1:/videos1 \
+    -v /path/to/directory/videos2:/videos2 \
     video-sum --dir /videos1 /videos2
 
 /videos1
