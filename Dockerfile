@@ -1,8 +1,8 @@
 # use node 8
-FROM node:8.1.4
+FROM node:10.16.0
 
 # add backports, so that the ffmpeg can be installed
-RUN echo deb http://http.debian.net/debian jessie-backports main >> /etc/apt/sources.list.d/backports.list
+RUN echo deb http://http.debian.net/debian stretch-backports main >> /etc/apt/sources.list.d/backports.list
 
 # install updates and the ffmpeg
 RUN apt-get update && \
