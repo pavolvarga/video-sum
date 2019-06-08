@@ -1,6 +1,6 @@
 {
   "name": "video-sum",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Command line app for summing lengths of video files",
   "main": "src/main.js",
   "license": "MIT",
