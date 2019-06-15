@@ -45,17 +45,17 @@ function getTotalTimePromise(files, processCount, parsedCmd) {
         (file) => readDuration(file, parsedCmd),
         {concurrency: processCount}
     )
-    .then(results => {
-        return results.reduce((acc, result) => {
-            if (typeof result === 'number') {
-                return acc.update('time', old => old + result);
-            }
-            return acc.update('unprocessedFiles', old => old.push(result));
-        }, Immutable.fromJS({time: 0, unprocessedFiles: []}));
-    })
-    .catch((err) => {
-        throw err;
-    });
+        .then(results => {
+            return results.reduce((acc, result) => {
+                if (typeof result === 'number') {
+                    return acc.update('time', old => old + result);
+                }
+                return acc.update('unprocessedFiles', old => old.push(result));
+            }, Immutable.fromJS({time: 0, unprocessedFiles: []}));
+        })
+        .catch((err) => {
+            throw err;
+        });
 }
 
 function getAllTotalTimesPromise(videoFiles, parsedCmd) {
