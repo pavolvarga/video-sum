@@ -16,7 +16,7 @@
     "node": ">=7.0.0"
   },
   "dependencies": {
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.3.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "3.5.0",
     "colors": "1.1.2",
@@ -34,13 +34,13 @@
     "babel-jest": "24.8.0",
     "babel-plugin-add-filehash": "6.9.8",
     "eslint": "5.16.0",
-    "eslint-loader": "1.8.0",
+    "eslint-loader": "4.0.2",
     "eslint-plugin-jest": "20.0.3",
     "jest": "24.8.0",
     "jest-immutable-matchers": "2.0.1",
     "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
-    "webpack": "2.6.1",
+    "webpack": "5.75.0",
     "webpack-node-externals": "1.6.0"
   },
   "scripts": {
